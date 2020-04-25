@@ -10,7 +10,7 @@
         (move ?from ?to - node)
         (at ?pos - node)
         (connected ?start ?end - node)
-        (gostAt ?pos - node)
+        (ghostAt ?pos - node)
         ;; we must visit the pos where food at
         (foodAt ?pos - node)
         (eat ?pos - node)
@@ -24,14 +24,14 @@
         :precondition (and
             (at ?start)
             (or (connected ?start ?end) (connected ?end ?start))
-            (or (not (gostAt ?end)) (invulnerable))
+            (or (not (ghostAt ?end)) (invulnerable))
         )
         :effect (and
             (at ?end)
             (not (at ?start))
             (when (foodAt ?end) (eat ?end))
             (when (capsuleAt ?end) (and (invulnerable) (not (capsuleAt ?end))))
-            (when (and (gostAt ?end) (invulnerable)) (not (gostAt ?end)))
+            (when (and (ghostAt ?end) (invulnerable)) (not (ghostAt ?end)))
         )
     )
 )
