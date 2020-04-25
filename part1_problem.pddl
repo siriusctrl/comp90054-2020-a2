@@ -22,13 +22,13 @@
         (connected a-2 b-2)
         (connected a-3 b-3)
         (at a-1)
-        (visited a-1)
         (gostAt a-2)
+        (foodAt a-3)
 	)
 
     (:goal
         (and
-            (visited a-3)
+            (eat a-3)
         )
 	)
 )
