@@ -28,7 +28,7 @@
 
     (:goal
         (and
-            (eat a-3)
+            (not (foodAt a-3))
         )
 	)
 )

@@ -7,13 +7,11 @@
     )
 
     (:predicates
-        (move ?from ?to - node)
         (at ?pos - node)
         (connected ?start ?end - node)
         (gostAt ?pos - node)
         ;; we must visit the pos where food at
         (foodAt ?pos - node)
-        (eat ?pos - node)
     )
 
 
@@ -27,7 +25,7 @@
         :effect (and
             (at ?end)
             (not (at ?start))
-            (when (foodAt ?end) (eat ?end))
+            (when (foodAt ?end) (not (foodAt ?end)))
         )
     )
 
