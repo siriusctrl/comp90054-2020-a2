@@ -28,7 +28,7 @@
 
     (:goal
         (and
-            (not (foodAt a-3))
+            (not (exists (?node - node) (foodAt ?node)))
         )
 	)
 )
