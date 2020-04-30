@@ -29,16 +29,24 @@
             (or (connected ?start ?end) (connected ?end ?start))
             (or (not (ghostAt ?end)) (not (= ?vul zero)))
             (or 
+                ; not food
                 (not (foodAt ?end))
-                (and
-                    (not (ghostAt a-4))
-                    (not (ghostAt b-4))
+                ;not last food
+                (exists
+                    (?pos - node)
+                    (and 
+                        (not (= ?pos ?end))
+                        (foodAt ?pos)
+                    )
                 )
+                ; ghost are all gone
+                (forall (?pos - node) (not (ghostAt ?pos)))
             )
         )
         :effect (and
             (at ?end)
             (not (at ?start))
+            ; no need to test invulnerable as we already put it into pre
             (when (ghostAt ?end) (not (ghostAt ?end)))
             (when (foodAt ?end) (not (foodAt ?end)))
             
