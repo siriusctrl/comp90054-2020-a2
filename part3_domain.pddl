@@ -63,14 +63,13 @@
                 )
             )
             
-            (when 
-                (= ?vul one) 
-                (and (invulnerable zero) (not (invulnerable ?vul)))
-            )
-            
-            (when 
-                (= ?vul two)
-                (and (invulnerable one) (not (invulnerable ?vul)))
+            (forall (?x - num)
+                (when (decay ?vul ?x)
+                    (and
+                        (not (invulnerable ?vul))
+                        (invulnerable ?x)
+                    )
+                )
             )
         )
     )
