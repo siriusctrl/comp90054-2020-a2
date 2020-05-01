@@ -14,7 +14,7 @@
 
     (:objects
         a-1 a-2 a-3 a-4 a-5 b-1 b-2 b-3 b-4 b-5 - node
-        zero one two three - num
+        zero one two - num
 	)
 	
 	(:init
@@ -37,6 +37,10 @@
         (capsuleAt b-2)
         (capsuleAt b-5)
         (at a-1)
+        (decay two one)
+        (decay one zero)
+        (decay zero zero)
+        (maxCapsuleDuration two)
         (invulnerable zero)
 	)
 

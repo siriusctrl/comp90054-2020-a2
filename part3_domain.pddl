@@ -13,19 +13,23 @@
         (ghostAt ?pos - node)
         ;; we must visit the pos where food at
         (foodAt ?pos - node)
-        (invulnerable ?vul - num)
         (capsuleAt ?pos - node)
+        (invulnerable ?vul - num)
+        (decay ?from ?to - num)
+        (maxCapsuleDuration ?value - num)
     )
 
 
     (:action move
         :parameters (
             ?start ?end - node 
-            ?vul - num
+            ?vul ?max - num
         )
         :precondition (and
             (at ?start)
             (invulnerable ?vul)
+            (maxCapsuleDuration ?max)
+
             (or (connected ?start ?end) (connected ?end ?start))
             (or (not (ghostAt ?end)) (not (= ?vul zero)))
             (or 
@@ -54,7 +58,7 @@
                 (capsuleAt ?end)
                 (and 
                     (not (invulnerable ?vul))
-                    (invulnerable two)
+                    (invulnerable ?max)
                     (not (capsuleAt ?end))
                 )
             )
