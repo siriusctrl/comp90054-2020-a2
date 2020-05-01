@@ -53,16 +53,7 @@
             ; no need to test invulnerable as we already put it into pre
             (when (ghostAt ?end) (not (ghostAt ?end)))
             (when (foodAt ?end) (not (foodAt ?end)))
-            
-            (when 
-                (capsuleAt ?end)
-                (and 
-                    (not (invulnerable ?vul))
-                    (invulnerable ?max)
-                    (not (capsuleAt ?end))
-                )
-            )
-            
+
             ; perform state transaction for capsule
             (forall (?x - num)
                 (when (decay ?vul ?x)
@@ -70,6 +61,15 @@
                         (not (invulnerable ?vul))
                         (invulnerable ?x)
                     )
+                )
+            )
+            
+            (when 
+                (capsuleAt ?end)
+                (and 
+                    (not (invulnerable ?vul))
+                    (invulnerable ?max)
+                    (not (capsuleAt ?end))
                 )
             )
         )
