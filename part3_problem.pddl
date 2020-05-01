@@ -49,9 +49,8 @@
 
     (:goal
         (and
-            (not (foodAt a-5))
-            (not (ghostAt a-4))
-            (not (ghostAt b-4))
+            (not (exists (?node - node) (foodAt ?node)))
+            (not (exists (?node - node) (ghostAt ?node)))
         )
 	)
 )
