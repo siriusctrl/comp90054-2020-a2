@@ -63,6 +63,7 @@
                 )
             )
             
+            ; perform state transaction for capsule
             (forall (?x - num)
                 (when (decay ?vul ?x)
                     (and

@@ -31,12 +31,14 @@
         (connected a-3 b-3)
         (connected a-4 b-4)
         (connected a-5 b-5)
+        ; define the initial postion elements on the map
         (ghostAt a-4)
         (ghostAt b-4)
         (foodAt a-5)
         (capsuleAt b-2)
         (capsuleAt b-5)
         (at a-1)
+        ; define the capsule transaction
         (decay two one)
         (decay one zero)
         (decay zero zero)
