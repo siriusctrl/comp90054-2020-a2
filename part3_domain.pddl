@@ -23,7 +23,7 @@
     (:action move
         :parameters (
             ?start ?end - node 
-            ?vul ?max - num
+            ?vul ?max ?next - num
         )
         :precondition (and
             (at ?start)
@@ -32,9 +32,7 @@
 
             (or (connected ?start ?end) (connected ?end ?start))
             (or (not (ghostAt ?end)) (not (= ?vul zero)))
-            (or 
-                ; not food
-                (not (foodAt ?end))
+            (or
                 ;not last food
                 (exists
                     (?pos - node)
@@ -44,8 +42,11 @@
                     )
                 )
                 ; ghost are all gone
-                (forall (?pos - node) (not (ghostAt ?pos)))
+                (not (exists (?pos - node) (ghostAt ?pos)))
             )
+
+            ;find the correct transition that we are going to perform
+            (decay ?vul ?next)
         )
         :effect (and
             (at ?end)
@@ -54,18 +55,18 @@
             (when (ghostAt ?end) (not (ghostAt ?end)))
             (when (foodAt ?end) (not (foodAt ?end)))
 
-            ; perform state transaction for capsule
-            (forall (?x - num)
-                (when (decay ?vul ?x)
-                    (and
-                        (not (invulnerable ?vul))
-                        (invulnerable ?x)
-                    )
+            ; perform state transition for capsule
+            ; only perform state transition when there is no capsule eaten this round
+            ; if not doing this, the solution may not be the optimal one
+            (when (not (capsuleAt ?end))
+                (and
+                    (not (invulnerable ?vul))
+                    (invulnerable ?next)
                 )
             )
-            
-            (when 
-                (capsuleAt ?end)
+
+            ; when eat capsule, reset the invulnerable duration to max
+            (when (capsuleAt ?end)
                 (and 
                     (not (invulnerable ?vul))
                     (invulnerable ?max)

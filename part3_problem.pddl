@@ -18,6 +18,7 @@
 	)
 	
 	(:init
+        ; define the map
         (connected a-1 a-2)
         (connected a-2 a-3)
         (connected a-3 a-4)
@@ -31,7 +32,7 @@
         (connected a-3 b-3)
         (connected a-4 b-4)
         (connected a-5 b-5)
-        ; define the initial postion elements on the map
+        ; define the initial postion of elements on the map
         (ghostAt a-4)
         (ghostAt b-4)
         (foodAt a-5)
@@ -39,6 +40,9 @@
         (capsuleAt b-5)
         (at a-1)
         ; define the capsule transaction
+        ; if you want to dynamically change the capsule timelimit
+        ; you should define the state transition (decay ?from ?to)
+        ; here
         (decay two one)
         (decay one zero)
         (decay zero zero)
